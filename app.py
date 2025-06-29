@@ -18,8 +18,8 @@ from PyPDF2 import PdfReader, PdfWriter
 
 # ---- API KEYS (set from env in real usage) ----
 
-MISTRAL_API_KEY = st.secrets["MISTRAL_API_KEY"]
-GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+MISTRAL_API_KEY = "SX19qOYNaafTRsWY0h6YVy2t4DedEqtQ"
+GEMINI_API_KEY = "AIzaSyBcP0adNMp_fmixvq9bEB0x0T6J4CFR0Q8"
 
 # ---- Local Directories and Checkpoints ----
 MODEL_PATHS = {
