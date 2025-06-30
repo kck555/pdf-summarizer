@@ -18,8 +18,8 @@ from PyPDF2 import PdfReader, PdfWriter
 
 # ---- API KEYS (set from env in real usage) ----
 
-MISTRAL_API_KEY = "SX19qOYNaafTRsWY0h6YVy2t4DedEqtQ"
-GEMINI_API_KEY = "AIzaSyBcP0adNMp_fmixvq9bEB0x0T6J4CFR0Q8"
+MISTRAL_API_KEY = st.secrets["MISTRAL_API_KEY"]
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
 # ---- Local Directories and Checkpoints ----
 MODEL_PATHS = {
@@ -228,11 +228,11 @@ online_model = None
 if mode_choice == "Offline":
     offline_model = st.selectbox(
         "Select offline model:",
-        ("Flan-T5-Large", "LaMini-Flan-T5-248M", "DistilBART-CNN-12-6", "Pegasus"),
+        ("LaMini-Flan-T5-248M", "DistilBART-CNN-12-6","Flan-T5-Large", "Pegasus"),
         index=0
     )
 else:
-    online_model = st.selectbox("Select online model:", ("BART", "Mistral", "Gemini"), index=0)
+    online_model = st.selectbox("Select online model:", ("Mistral", "Gemini","BART"), index=0)
 
 summary_length = st.radio("Select summary length:", ("Small", "Medium", "Large"), index=1)
 uploaded_file = st.file_uploader("📤 Upload your PDF file", type=['pdf'])
