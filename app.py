@@ -238,7 +238,7 @@ summary_length = st.radio("Select summary length:", ("Small", "Medium", "Large")
 uploaded_file = st.file_uploader("📤 Upload your PDF file", type=['pdf'])
 
 
-@st.cache_data
+@st.cache_data(max_entries=3, ttl=3600)
 def encode_pdf_bytes(file_bytes):
     return base64.b64encode(file_bytes).decode("utf-8")
 
@@ -255,24 +255,13 @@ if uploaded_file is not None:
     with open(filepath, "wb") as f:
         f.write(file_bytes)
 
-
-        # Preview trigger
-    if st.button("👀 Preview PDF"):
-        base64_pdf = encode_pdf_bytes(file_bytes)
-        st.markdown("📄 **Preview of Uploaded PDF:**", unsafe_allow_html=True)
-        st.markdown(
-            f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="400px" type="application/pdf"></iframe>',
-            unsafe_allow_html=True
-        )
-
-
-        # 🔽 Add fallback download button here
-        st.download_button(
-            label="📥 Download Uploaded PDF",
-            data=open(filepath, "rb").read(),
-            file_name=filename,
-            mime="application/pdf"
-            )
+    # 🔽 Add download button here
+    st.download_button(
+        label="📥 Download Uploaded PDF",
+        data=open(filepath, "rb").read(),
+        file_name=filename,
+        mime="application/pdf"
+    )
 
        # Trigger summarization
     summarize_clicked = st.button("🧠 Summarize")
